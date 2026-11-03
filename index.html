@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Herramienta de repaso para el protocolo de investigación y su metodología.">
+  <title>Repaso · Proyecto de estacionamientos ITSX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/views.js" defer></script>
+  <script src="js/quiz.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" id="brand-home" aria-label="Ir al inicio">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>REPASO<span class="brand-dot">.</span></span>
+      </a>
+      <div class="topbar-caption">PROYECTO DE ESTACIONAMIENTOS · ITSX</div>
+      <button class="text-button hidden" id="back-home" type="button">← Inicio</button>
+    </header>
+
+    <main id="app" class="main-content" aria-live="polite">
+      <section class="hero-block">
+        <div class="eyebrow"><span class="eyebrow-line"></span> TALLER DE INVESTIGACIÓN II</div>
+        <h1>Prepárate para<br><span>dominar tu proyecto.</span></h1>
+        <p class="hero-description">Repasa el protocolo de investigación y el desarrollo metodológico mediante preguntas, explicaciones y práctica enfocada en tus áreas de oportunidad.</p>
+      </section>
+
+      <section class="bank-grid" aria-label="Bancos de preguntas">
+        <button class="bank-card bank-protocol" type="button" data-bank="protocolo">
+          <span class="card-kicker">BANCO 01</span>
+          <span class="card-icon icon-document" aria-hidden="true">⌑</span>
+          <span class="bank-title">Protocolo de<br>investigación</span>
+          <span class="bank-description">Problema, marco teórico y marco metodológico.</span>
+          <span class="card-bottom"><span>3 capítulos · 15 preguntas</span><span class="card-arrow">↗</span></span>
+        </button>
+        <button class="bank-card bank-method" type="button" data-bank="metodologia">
+          <span class="card-kiẑcker">BANCO 02</span>
+          <span class="card-icon icon-network" aria-hidden="true">⌘</span>
+          <span class="bank-title">Metodología<br>del proyecto</span>
+          <span class="bank-description">De los requerimientos a la implementación y MVVM.</span>
+          <span class="card-bottom"><span>11 secciones · 22 preguntas</span><span class="card-arrow">↗</span></span>
+        </button>
+      </section>
+
+      <section class="home-note">
+        <span class="note-icon">✳</span>
+        <p><strong>Estudia a tu ritmo.</strong> Recibe una explicación después de cada respuesta y vuelve a practicar las preguntas que necesites reforzar.</p>
+      </section>
+    </main>
+
+    <footer class="footer"><span>HERRAMIENTA DE ESTUDIO</span><span>37 PREGUNTAS · 2 BANCOS</span></footer>
+  </div>
+</body>
+</html>

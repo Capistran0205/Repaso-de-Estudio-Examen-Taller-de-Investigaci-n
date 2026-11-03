@@ -1,0 +1,601 @@
+{
+  "id": "metodologia",
+  "titulo": "Metodología del proyecto",
+  "descripcion": "Desarrollo metodológico del sistema de gestión dinámica de cajones de estacionamiento estudiantil.",
+  "secciones": [
+    {
+      "id": "m-seccion-1",
+      "titulo": "1. Requerimientos",
+      "preguntas": [
+        {
+          "id": "M01",
+          "enunciado": "Un estudiante confirma una reserva y no llega al estacionamiento. ¿Cuánto tiempo total tiene para validar su QR antes de que la reserva se cancele y se registre como inasistencia?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "1 hora exacta"
+            },
+            {
+              "id": "b",
+              "texto": "1 hora más 20 minutos de tolerancia"
+            },
+            {
+              "id": "c",
+              "texto": "20 minutos"
+            },
+            {
+              "id": "d",
+              "texto": "15 horas"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Al confirmar la reserva se establece un cronómetro de 1 hora para la llegada. Al terminar se asigna un margen de tolerancia de 20 minutos y se notifica el retraso. Si no llega en ese margen, la reserva se cancela, el QR se invalida, el cajón vuelve a \"libre\" y se registra una inasistencia. Con 3 inasistencias en un mes, el estudiante no puede reservar durante 7 días. Las 15 horas son la duración máxima de una reserva, no el tiempo de llegada.\n\n---"
+        },
+        {
+          "id": "M02",
+          "enunciado": "¿Qué combinación de reglas de negocio de Gestión de Ocupación es correcta?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Un cambio de estado se acepta si la lectura es estable 5 s; un nodo pasa a \"no conectado\" tras 30 s sin datos"
+            },
+            {
+              "id": "b",
+              "texto": "Un cambio de estado se acepta si la lectura es estable 3 s; un nodo pasa a \"no conectado\" tras 60 s sin datos"
+            },
+            {
+              "id": "c",
+              "texto": "Un cambio de estado se acepta de inmediato; un nodo pasa a \"no conectado\" tras 60 s sin datos"
+            },
+            {
+              "id": "d",
+              "texto": "Un cambio de estado se acepta si la lectura es estable 3 s; un nodo pasa a \"no conectado\" tras 10 minutos sin datos"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Un cambio reportado por un sensor se acepta solo si la lectura se mantiene estable 3 segundos (para evitar falsos positivos), y un nodo que no envía datos durante 60 segundos pasa a \"no conectado\". Los 5 segundos del documento son un requerimiento no funcional distinto: el tiempo máximo para reflejar un cambio en la interfaz.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-2",
+      "titulo": "2. Análisis de resultados de las encuestas",
+      "preguntas": [
+        {
+          "id": "M03",
+          "enunciado": "En la Encuesta de Movilidad, ¿cuál fue el problema más señalado por los usuarios del estacionamiento y qué módulo lo sustenta principalmente?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Mal uso de los cajones (60%); módulo de Reserva"
+            },
+            {
+              "id": "b",
+              "texto": "Problemas en el flujo de entradas y salidas (20%); módulo de Historial"
+            },
+            {
+              "id": "c",
+              "texto": "Cupo lleno al llegar (100%); módulo de Gestión de Ocupación de Cajones"
+            },
+            {
+              "id": "d",
+              "texto": "Robo y daños materiales (10%); módulo de Reserva"
+            }
+          ],
+          "respuestaCorrecta": "c",
+          "explicacion": "Los 10 estudiantes que usan el estacionamiento reportaron encontrar el cupo lleno al llegar (100%). Esto sustenta el módulo de Gestión de Ocupación, que permite conocer la disponibilidad antes de llegar, y de forma complementaria la Reserva. El mal uso de los cajones fue el segundo problema (60%) y se atiende parcialmente con el QR y la sincronización sensor-reserva. Robo y daños quedaron fuera del alcance del sistema.\n\n---"
+        },
+        {
+          "id": "M04",
+          "enunciado": "En la Encuesta de Preferencias, la navegación por GPS obtuvo más votos (55.8%) que el historial de horas pico (39.5%). ¿Por qué se desarrolló el Historial de Horas Promedio?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Porque el GPS tuvo menos votos que el historial"
+            },
+            {
+              "id": "b",
+              "texto": "Porque el GPS no garantiza precisión dentro de un estacionamiento, su integración tomaría más tiempo y el historial aprovecha datos que los sensores ya registran"
+            },
+            {
+              "id": "c",
+              "texto": "Porque el docente exigió el historial como único módulo adicional"
+            },
+            {
+              "id": "d",
+              "texto": "Porque Flet no permite usar el GPS del teléfono"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "El GPS de un teléfono no garantiza la precisión necesaria dentro de un estacionamiento, y su integración y pruebas requerirían tiempo adicional. El historial reutiliza los datos de ocupación que ya generan los sensores, mediante el cálculo diario del promedio por cajón, una gráfica y el filtro por fechas. La opción A es falsa porque el GPS sí tuvo más votos.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-3",
+      "titulo": "3. Indagar en proyectos similares",
+      "preguntas": [
+        {
+          "id": "M05",
+          "enunciado": "En la tabla comparativa, ¿qué trabajo usa una cámara \"inteligente\" con una CNN propia que corre directamente en la cámara, sin servidor central, para clasificar cajones como ocupado o libre?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Prototipo Web de Control de Aparcamientos (Posadas Duran)"
+            },
+            {
+              "id": "b",
+              "texto": "Deep Learning for Decentralized Parking Lot Occupancy Detection (Amato)"
+            },
+            {
+              "id": "c",
+              "texto": "Smart Cars Parking Systems of Big Cities based on IoT (Abdul Rahaim)"
+            },
+            {
+              "id": "d",
+              "texto": "Smart Parking Solutions: A Review (Sarathambekai)"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "El trabajo de Amato propone una CNN ligera diseñada para hardware embebido que corre en la propia cámara, con desempeño comparable a AlexNet siendo unas 1000 veces más pequeña. Posadas Duran es un control administrativo sin IA. Abdul Rahaim usa sensores ultrasónicos o infrarrojos por cajón más cámaras en accesos. Sarathambekai es una revisión que cataloga técnicas como CNN, YOLO y LSTM.\n\n---"
+        },
+        {
+          "id": "M06",
+          "enunciado": "Del análisis comparativo, ¿qué funcionalidad de los trabajos revisados quedó fuera del alcance de este proyecto?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Detección de ocupación por cajón"
+            },
+            {
+              "id": "b",
+              "texto": "Reserva de cajón con ventana de tiempo"
+            },
+            {
+              "id": "c",
+              "texto": "Integración de IA o visión por computadora (CNN, YOLO, LSTM)"
+            },
+            {
+              "id": "d",
+              "texto": "Consulta de disponibilidad en un mapa en tiempo real"
+            }
+          ],
+          "respuestaCorrecta": "c",
+          "explicacion": "El proyecto retoma la detección por cajón con sensores, la reserva con ventana de tiempo y la visualización de disponibilidad en tiempo real. La IA y la visión por computadora (presentes en Amato y Sarathambekai) no se integran, en coherencia con el marco teórico, que prefiere sensores infrarrojos distribuidos por la escala acotada del estacionamiento y las restricciones de costo y cómputo.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-4",
+      "titulo": "4. Levantamiento topográfico y clasificación de cajones",
+      "preguntas": [
+        {
+          "id": "M07",
+          "enunciado": "¿Cuál es la descripción correcta del estacionamiento estudiantil según el plano y las mediciones?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "67 cajones en tres hileras diagonales, perímetro aprox. 196.93 m y superficie aprox. 1801.94 m²"
+            },
+            {
+              "id": "b",
+              "texto": "64 cajones en dos hileras rectas, perímetro aprox. 150 m y superficie aprox. 1200 m²"
+            },
+            {
+              "id": "c",
+              "texto": "67 cajones en tres hileras rectas, perímetro aprox. 96.93 m y superficie aprox. 18019 m²"
+            },
+            {
+              "id": "d",
+              "texto": "43 cajones en una sola hilera, perímetro aprox. 196.93 m y superficie aprox. 1801.94 m²"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "El plano muestra 67 cajones numerados del 1 al 67, en tres hileras diagonales (cada cajón inclinado respecto al pasillo), con un solo cajón para discapacitados y una caseta. Las medidas se obtuvieron de forma aproximada con la función de medir distancia de Google Maps y sirven para establecer el rango de cobertura de la red de sensores. Los números 64 y 43 corresponden al número de respuestas de las encuestas.\n\n---"
+        },
+        {
+          "id": "M08",
+          "enunciado": "¿Por qué se establece la caseta como punto de control del microcontrolador y se consideran los postes de CFE?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "La caseta cuenta con energía eléctrica y resguardo para el microcontrolador; los postes de CFE son fuente cercana de alimentación para sensores y LEDs"
+            },
+            {
+              "id": "b",
+              "texto": "La caseta es el punto más alejado del estacionamiento, lo que mejora la señal WiFi"
+            },
+            {
+              "id": "c",
+              "texto": "Los postes de CFE se usarán como antenas LoRa"
+            },
+            {
+              "id": "d",
+              "texto": "La caseta tiene un servidor local donde se instalará la base de datos"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "La caseta, ubicada en la parte inferior del plano, tiene energía eléctrica para la conectividad del microcontrolador y para resguardarlo. Los postes de luz de CFE son una fuente de energía cercana para alimentar los sensores y LEDs de cada cajón (nodo). No se menciona un servidor local: el broker y la base de datos son servicios en la nube.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-5",
+      "titulo": "5. Modelado de datos del sistema",
+      "preguntas": [
+        {
+          "id": "M09",
+          "enunciado": "¿Qué conjunto representa correctamente las entidades del diagrama entidad-relación?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Usuario, Administrador, Cajón, Reserva, Notificación y Pago"
+            },
+            {
+              "id": "b",
+              "texto": "Usuario, Sesión, Cajón de estacionamiento, Reserva de cajón, Historial de ocupación y Evento de ocupación"
+            },
+            {
+              "id": "c",
+              "texto": "Usuario, Cajón, Reserva y Sensor"
+            },
+            {
+              "id": "d",
+              "texto": "Estudiante, Vehículo, Cajón, Reserva, QR y Historial"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "El sistema define seis entidades: Usuario (estudiantes y un único administrador, diferenciados por el atributo `rol`), Sesión (autenticación con token), Cajón (nodo monitoreado en tiempo real), Reserva de cajón, Historial de ocupación (registro derivado de eventos) y Evento de ocupación (cada cambio de estado detectado). El administrador no es una entidad aparte, el QR es un atributo de la reserva y no existen entidades de pago ni de notificación.\n\n---"
+        },
+        {
+          "id": "M10",
+          "enunciado": "En la relación Usuario–Realiza–Reserva de cajón (1:N), ¿cómo se interpreta la cardinalidad?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Un usuario puede tener varias reservas activas al mismo tiempo"
+            },
+            {
+              "id": "b",
+              "texto": "Un usuario puede tener muchas reservas a lo largo del tiempo, pero solo una activa a la vez"
+            },
+            {
+              "id": "c",
+              "texto": "Una reserva puede pertenecer a varios usuarios"
+            },
+            {
+              "id": "d",
+              "texto": "Cada usuario solo puede hacer una reserva en toda su vida"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "La nota del diagrama aclara que un usuario solo tiene permitida una reserva activa (no varias simultáneas), y que no será siempre la misma reserva, porque cambia según la disponibilidad de cajones. Esto concuerda con la regla de negocio de máximo una reserva activa por estudiante y con la relación N:1 de Reserva con Cajón.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-6",
+      "titulo": "6. Flujo de datos del sistema",
+      "preguntas": [
+        {
+          "id": "M11",
+          "enunciado": "Según la sección de flujos, ¿cómo se reparte el almacenamiento de los datos?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Supabase para estudiantes y reservas; Firebase para eventos e historial de ocupación"
+            },
+            {
+              "id": "b",
+              "texto": "Firebase para estudiantes y reservas; Supabase para eventos e historial de ocupación"
+            },
+            {
+              "id": "c",
+              "texto": "Todo en el broker EMQX"
+            },
+            {
+              "id": "d",
+              "texto": "Todo en la memoria del ESP32"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "Supabase (PostgreSQL) persiste los datos de estudiantes y reservas, y Firebase (NoSQL) guarda los eventos y el historial de ocupación. EMQX solo es el broker MQTT que transporta los mensajes, y el ESP32 solo publica estados. *Nota para el examen:* el esquema de Supabase descrito en la implementación solo incluye usuarios, sesiones, cajones y reservas.\n\n---"
+        },
+        {
+          "id": "M12",
+          "enunciado": "¿Cuál de los siguientes NO es un flujo de datos modelado en la metodología?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Registro de usuario"
+            },
+            {
+              "id": "b",
+              "texto": "Ocupación en tiempo real (lado ESP32 y lado aplicación)"
+            },
+            {
+              "id": "c",
+              "texto": "Reserva de cajón"
+            },
+            {
+              "id": "d",
+              "texto": "Pago del estacionamiento"
+            }
+          ],
+          "respuestaCorrecta": "d",
+          "explicacion": "Los flujos modelados son: registro de usuario, inicio y cierre de sesión, restablecimiento de contraseña, modificación de datos, ocupación en tiempo real (un diagrama del lado del ESP32 y otro de la app), historial de horas promedio y reserva de cajón. El pago del estacionamiento no es parte del alcance, que se centra en la gestión de ocupación.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-7",
+      "titulo": "7. Diseñar la arquitectura de la red de sensores",
+      "preguntas": [
+        {
+          "id": "M13",
+          "enunciado": "¿Qué propuesta se eligió y cuál fue el argumento principal contra LoRa mesh?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Propuesta 1 (WiFi + MQTT); LoRa no garantiza una respuesta en segundos porque el nodo solo recibe mensajes justo después de transmitir"
+            },
+            {
+              "id": "b",
+              "texto": "Propuesta 2 (LoRa mesh); WiFi no tiene cobertura en el estacionamiento"
+            },
+            {
+              "id": "c",
+              "texto": "Propuesta 3 (RS-485); LoRa consume demasiada batería"
+            },
+            {
+              "id": "d",
+              "texto": "Propuesta 1 (WiFi + MQTT); LoRa no soporta sensores infrarrojos"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "Se eligió WiFi + MQTT porque los requerimientos suponen conexión WiFi y reflejo del cambio de estado en segundos. En su forma simple, LoRa solo permite recibir mensajes justo después de transmitir, lo que retrasa avisos como el de una reserva, además de exigir hardware y software extra para traducir mensajes al broker. El costo de WiFi es un mayor consumo energético, que se mitiga con deep sleep y se apoya en 2 puntos de acceso.\n\n---"
+        },
+        {
+          "id": "M14",
+          "enunciado": "¿Qué combinación resume correctamente por qué se descartó la propuesta cableada RS-485 y cómo se compensa la desventaja de WiFi + MQTT?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Exige canalizar cable a lo largo de casi 200 m y un daño dejaría varios cajones sin servicio; el mayor consumo de WiFi se compensa con 2 puntos de acceso y nodos en reposo hasta que el sensor detecta un cambio"
+            },
+            {
+              "id": "b",
+              "texto": "Es más cara que cualquier otra y no admite LEDs; el consumo de WiFi se compensa con cableado adicional"
+            },
+            {
+              "id": "c",
+              "texto": "No permite alimentar sensores; el consumo de WiFi se compensa con un servidor local en la caseta"
+            },
+            {
+              "id": "d",
+              "texto": "Tiene menor alcance que LoRa; el consumo de WiFi se compensa con más brokers MQTT"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "El cableado resuelve la dependencia de batería, pero obligaría a canalizar cable por casi 200 m en un estacionamiento en operación (obra civil inviable), y una falla en el cable afectaría a varios cajones. WiFi + MQTT falla de manera aislada por nodo y no exige obra civil. Su mayor consumo se mitiga con el nodo dormido (deep sleep) hasta que el sensor lo despierta por interrupción, y con dos puntos de acceso (caseta y extremo opuesto).\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-8",
+      "titulo": "8. Diseñar los mockups",
+      "preguntas": [
+        {
+          "id": "M15",
+          "enunciado": "La Encuesta de Preferencias mostró que el 74.4% prefiere un mapa interactivo y el 25.6% una lista con el número de espacios. ¿Cómo se refleja esto en el diseño de la pantalla de ocupación?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Se usa solo la lista, por ser más sencilla"
+            },
+            {
+              "id": "b",
+              "texto": "Se muestra el estado individual de cada cajón y también el conteo total de cajones disponibles"
+            },
+            {
+              "id": "c",
+              "texto": "Se muestra un mapa con navegación GPS hasta el cajón"
+            },
+            {
+              "id": "d",
+              "texto": "Se diferencian cajones de moto y de auto con puntos de colores distintos"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "La preferencia por el mapa respalda mostrar el estado individual de cada cajón para identificar visualmente dónde hay espacio. El conteo total de disponibles atiende al grupo que prefirió la lista, de modo que la interfaz combina ambos elementos. El documento aclara que no se distingue entre cajones por medio de transporte en la interfaz de ocupación, y que el GPS no se integró.\n\n---"
+        },
+        {
+          "id": "M16",
+          "enunciado": "¿Qué decisiones de diseño se derivan de las encuestas respecto al color y la paleta?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Paleta sobre fondos oscuros con ajuste al modo oscuro del dispositivo, y colores de estado (verde/rojo) complementados con etiquetas de texto"
+            },
+            {
+              "id": "b",
+              "texto": "Solo modo claro, y colores sin etiquetas porque el 100% los entendió"
+            },
+            {
+              "id": "c",
+              "texto": "Paleta de grises para evitar distracciones al conducir"
+            },
+            {
+              "id": "d",
+              "texto": "Cuatro colores idénticos con distinto ícono para cada estado"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "El 62.8% considera muy importante el ajuste automático al modo oscuro, por lo que se diseña con paleta de estados sobre fondos oscuros y se formaliza como RNF de usabilidad, verificando el contraste en ambos modos. El 86% encontró clara la codificación verde/rojo, pero hubo comentarios sobre tonos poco distintivos, por lo que se sugiere complementar el color con una etiqueta de texto. La opción B es falsa: no todos la entendieron (86%) y el modo oscuro sí se contempla.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-9",
+      "titulo": "9. Implementar el firmware del microcontrolador",
+      "preguntas": [
+        {
+          "id": "M17",
+          "enunciado": "¿Cuál es el orden correcto del proceso para cargar MicroPython en el ESP32?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Descargar el .bin, instalar esptool, escribir el firmware y después borrar la memoria"
+            },
+            {
+              "id": "b",
+              "texto": "Instalar esptool, borrar la memoria con `erase_flash` y luego escribir el .bin con `write_flash`"
+            },
+            {
+              "id": "c",
+              "texto": "Escribir el .bin con `write_flash`, luego instalar esptool y borrar la memoria"
+            },
+            {
+              "id": "d",
+              "texto": "Instalar Flet, crear un entorno virtual y ejecutar `uv run`"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Primero se descarga el firmware (`ESP32_GENERIC_20260406`) y se instala la librería `esptool`. Después se borra la memoria con `esptool --chip esp32 --port COM5 erase_flash` y, tras un borrado exitoso, se escribe el .bin con `write_flash -z 0x1000` a 460800 baudios. El puerto COM debe ser reconocido y estar libre para evitar errores de bloqueo. La extensión PyMakr de VS Code permite luego cargar y ejecutar código.\n\n---"
+        },
+        {
+          "id": "M18",
+          "enunciado": "¿Por qué se indica instalar `esptool` en el Python global y no en un entorno virtual?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Porque esptool no funciona con Python 3.13"
+            },
+            {
+              "id": "b",
+              "texto": "Porque el código que se establece no se ejecuta en la computadora, sino directamente en el microcontrolador"
+            },
+            {
+              "id": "c",
+              "texto": "Porque los entornos virtuales no existen en Windows"
+            },
+            {
+              "id": "d",
+              "texto": "Porque UV prohíbe instalar paquetes de terceros"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "El código que se carga no se ejecuta en la computadora sino en el ESP32, por lo que el entorno virtual no aporta nada para esta herramienta. Cabe distinguir: `esptool` se instala globalmente, mientras que el proyecto de la aplicación (Flet, Supabase, paho-mqtt) sí usa un entorno virtual gestionado con UV.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-10",
+      "titulo": "10. Implementar la lógica de comunicación de la red de sensores",
+      "preguntas": [
+        {
+          "id": "M19",
+          "enunciado": "En el bucle principal del ESP32, ¿cómo se determina el estado de un cajón y qué se publica?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Con un solo sensor: si marca 1 se publica \"libre\"; si marca 0 se publica \"ocupado\""
+            },
+            {
+              "id": "b",
+              "texto": "Con ambos sensores IR: si ambos marcan 1 es \"ocupado\" (LED rojo); si ambos marcan 0 durante 2 s es \"libre\" (LED verde); se publica un JSON con `id_modulo` y `estado`"
+            },
+            {
+              "id": "c",
+              "texto": "Con ambos sensores IR: si ambos marcan 0 es \"ocupado\"; se publica texto plano sin formato"
+            },
+            {
+              "id": "d",
+              "texto": "Se publica el estado cada 60 segundos sin importar si hubo cambios"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Cada módulo tiene 2 sensores IR y 2 LEDs. Si ambos sensores detectan (1), se enciende el rojo, se apaga el verde y se publica \"ocupado\". Si ambos marcan 0, se espera un lapso de 2 s (que se reinicia si vuelven a detectar) y luego se enciende el verde y se publica \"libre\". El mensaje es un JSON `{\"id_modulo\": X, \"estado\": \"ocupado\"/\"libre\"}` en el tópico `infraestructura/pruebaiot/prueba1`. Solo se publica ante cambios de estado (más el estado inicial). *Nota:* la regla de negocio pide 3 s de estabilidad y el firmware usa 2 s.\n\n---"
+        },
+        {
+          "id": "M20",
+          "enunciado": "En la configuración de EMQX, ¿qué función cumplen *Access Control > Authentication* y *Authorization*?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Authentication crea las credenciales (usuario y contraseña) del cliente; Authorization define los permisos sobre el tópico (por ejemplo, publicar o suscribirse)"
+            },
+            {
+              "id": "b",
+              "texto": "Authentication define el plan Serverless; Authorization define la región"
+            },
+            {
+              "id": "c",
+              "texto": "Authentication guarda los mensajes JSON; Authorization los cifra con TLS"
+            },
+            {
+              "id": "d",
+              "texto": "Ambas hacen lo mismo y se pueden omitir en el plan gratuito"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "En Authentication se da de alta el usuario (en el proyecto, `AdminEstacionamientoPlacaESP32`, el mismo que usa el firmware). En Authorization, pestaña Username, se registra ese mismo usuario y se le asignan permisos de acción sobre el tópico `infraestructura/pruebaiot/prueba1`. El plan Serverless (1,000,000 de acciones y 1 GB de tráfico gratis al mes) y la región North America se eligen al crear el broker.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "m-seccion-11",
+      "titulo": "11. Implementar el diseño y la funcionalidad de los mockups (MVVM)",
+      "preguntas": [
+        {
+          "id": "M21",
+          "enunciado": "¿Qué afirmación describe correctamente el patrón MVVM tal como se aplica en el proyecto?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "La View contiene la lógica de negocio y el Model controla los controles de Flet"
+            },
+            {
+              "id": "b",
+              "texto": "La View (controles de Flet) solo refleja datos y reenvía eventos; el ViewModel expone propiedades listas para mostrar y comandos; el Model contiene entidades y accesos a Supabase, Firebase y MQTT sin conocer la interfaz"
+            },
+            {
+              "id": "c",
+              "texto": "El ViewModel accede directamente a los controles gráficos y la View accede a la base de datos"
+            },
+            {
+              "id": "d",
+              "texto": "El Model solo se usa para el diseño visual de los mockups"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "La View no incluye lógica de negocio: refleja datos y reenvía acciones al ViewModel. El ViewModel transforma los datos del Model y expone propiedades y comandos (por ejemplo, `iniciar_sesion()` o `puede_enviar`). El Model conforma las entidades y accesos a datos, y desconoce el estado de la interfaz. La conexión View–ViewModel se logra con el patrón Observer (clase `Observable` con `add_listener`, `remove_listener` y `notify_listeners`).\n\n---"
+        },
+        {
+          "id": "M22",
+          "enunciado": "Al registrar un estudiante, ¿qué hace la clase `EmqxAdminService`?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Envía el correo de confirmación mediante SendGrid"
+            },
+            {
+              "id": "b",
+              "texto": "Crea en EMQX las credenciales del usuario (mismo correo y contraseña de Supabase) y le asigna una ACL que solo le permite suscribirse al tópico de ocupación"
+            },
+            {
+              "id": "c",
+              "texto": "Crea las tablas de la base de datos en Supabase"
+            },
+            {
+              "id": "d",
+              "texto": "Permite al estudiante publicar estados de cajones desde la app"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "`EmqxAdminService` da de alta al estudiante en EMQX con las mismas credenciales de su registro y una ACL de solo suscripción al tópico de ocupación publicado por el ESP32, de modo que el estudiante puede ver estados pero no publicarlos. También se usa al restablecer la contraseña para mantener sincronizada la contraseña MQTT (si falla, solo se registra en el log y el cambio continúa). El correo de confirmación lo envía Supabase Auth con SMTP de SendGrid (`smtp.sendgrid.net`, puerto 587).\n\n---\n\n## Clave de respuestas\n\n| P | R | P | R | P | R | P | R |\n|---|---|---|---|---|---|---|---|\n| 1 | B | 7 | A | 13 | A | 19 | B |\n| 2 | B | 8 | A | 14 | A | 20 | A |\n| 3 | C | 9 | B | 15 | B | 21 | B |\n| 4 | B | 10 | B | 16 | A | 22 | B |\n| 5 | B | 11 | A | 17 | B | | |\n| 6 | C | 12 | D | 18 | B | | |"
+        }
+      ]
+    }
+  ]
+}

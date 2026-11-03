@@ -1,0 +1,385 @@
+{
+  "id": "protocolo",
+  "titulo": "Protocolo de investigación",
+  "descripcion": "Diseño de una arquitectura de red de sensores infrarrojos para la gestión dinámica de cajones de estacionamiento estudiantil en el ITSX.",
+  "secciones": [
+    {
+      "id": "p-seccion-1",
+      "titulo": "Capítulo I. Problema",
+      "preguntas": [
+        {
+          "id": "P01",
+          "enunciado": "Según el planteamiento del problema (datos del IMCO), ¿cuál era la relación de automóviles por habitante en Xalapa en 2020?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "1 auto por cada 3 personas"
+            },
+            {
+              "id": "b",
+              "texto": "1 auto por cada 2.2 habitantes"
+            },
+            {
+              "id": "c",
+              "texto": "1 auto por cada 5 habitantes"
+            },
+            {
+              "id": "d",
+              "texto": "1 auto por cada habitante"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "En 2010 había 1 auto por cada 3 personas y en 2020 pasó a 1 por cada 2.2 habitantes, con más de 200 mil vehículos. El tiempo que un conductor pierde buscando estacionamiento oscila entre 3 y 14 minutos (Diario de Xalapa, 2024).\n\n---"
+        },
+        {
+          "id": "P02",
+          "enunciado": "¿Cuál es el problema específico detectado en el estacionamiento estudiantil del ITSX?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "No hay cajones suficientes porque se incumple el reglamento urbano"
+            },
+            {
+              "id": "b",
+              "texto": "Falta de acceso a la información de ocupación de los cajones en tiempo real"
+            },
+            {
+              "id": "c",
+              "texto": "Cobros excesivos por el uso del estacionamiento"
+            },
+            {
+              "id": "d",
+              "texto": "Ausencia total de vigilancia vehicular"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Los estudiantes entran al circuito interno sin confirmar disponibilidad. Eso satura las vías, genera cuellos de botella y maniobras de retorno forzadas, y traslada la saturación a las calles aledañas.\n\n---"
+        },
+        {
+          "id": "P03",
+          "enunciado": "¿Cuál de los siguientes **NO** es un objetivo específico del protocolo?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Modelar el flujo de datos entre sensores, microcontrolador y sistema de gestión"
+            },
+            {
+              "id": "b",
+              "texto": "Diseñar los mockups del sistema prototipo"
+            },
+            {
+              "id": "c",
+              "texto": "Implementar el sistema en todos los estacionamientos de Xalapa"
+            },
+            {
+              "id": "d",
+              "texto": "Verificar el funcionamiento mediante pruebas funcionales"
+            }
+          ],
+          "respuestaCorrecta": "c",
+          "explicacion": "El alcance del protocolo es un prototipo para el estacionamiento estudiantil del ITSX. Los 9 objetivos específicos cubren análisis, antecedentes, modelado de datos y de flujo, arquitectura de sensores, mockups, implementación, pruebas y evaluación con los estudiantes. Ninguno plantea implementarlo en toda la ciudad.\n\n---"
+        },
+        {
+          "id": "P04",
+          "enunciado": "En la relevancia social, ¿qué dos funcionalidades diferencian la propuesta de los antecedentes revisados?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Cobro digital por QR y membresías"
+            },
+            {
+              "id": "b",
+              "texto": "Cámaras con visión por computadora y reconocimiento de placas"
+            },
+            {
+              "id": "c",
+              "texto": "Reserva de espacios y notificaciones de disponibilidad por voz"
+            },
+            {
+              "id": "d",
+              "texto": "Navegación GPS y pantallas LED en las entradas"
+            }
+          ],
+          "respuestaCorrecta": "c",
+          "explicacion": "Los antecedentes usan sensores ultrasónicos y de presencia, pero no contemplan la reserva de espacios ni las notificaciones por voz. El protocolo también reconoce que no llena un vacío de conocimiento, solo complementa lo ya existente.\n\n---"
+        },
+        {
+          "id": "P05",
+          "enunciado": "En la viabilidad (recurso humano), ¿qué roles tiene el equipo de cinco integrantes?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Líder, analista de procesos, diseñador, desarrollador y encargado de pruebas"
+            },
+            {
+              "id": "b",
+              "texto": "Gerente, contador, electricista, programador y vendedor"
+            },
+            {
+              "id": "c",
+              "texto": "Líder, DBA, diseñador, tester y especialista en redes"
+            },
+            {
+              "id": "d",
+              "texto": "Analista, programador, asesor de electrónica, tesorero y secretario"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "El líder coordina y supervisa. Además se contempla un asesor en electrónica, idealmente un docente de Electrónica o Mecatrónica. El costo estimado del protocolo es de unos $1,000 MXN y el tiempo, de 4 a 6 meses.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "p-seccion-2",
+      "titulo": "Capítulo II. Marco teórico",
+      "preguntas": [
+        {
+          "id": "P06",
+          "enunciado": "Según Donald Shoup (2.2.1), ¿qué origina gran parte del caos de la búsqueda de estacionamiento (*cruising for parking*)?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "La falta de sensores y aplicaciones móviles"
+            },
+            {
+              "id": "b",
+              "texto": "Los requisitos mínimos de estacionamiento y la sobreoferta de espacios gratuitos"
+            },
+            {
+              "id": "c",
+              "texto": "Las tarifas demasiado altas en zonas céntricas"
+            },
+            {
+              "id": "d",
+              "texto": "El exceso de transporte público"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Shoup (*The High Cost of Free Parking*) sostiene que los requisitos mínimos de estacionamiento y la sobreoferta de espacios gratuitos crean un subsidio oculto. Los conductores usan el auto como si estacionar no costara nada y el resultado es la congestión. Además, el estacionamiento gratuito en calle sufre la \"tragedia de los comunes\".\n\n---"
+        },
+        {
+          "id": "P07",
+          "enunciado": "¿Por qué el sensor infrarrojo por reflexión es la configuración más práctica para el proyecto (2.5.2)?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Porque el vehículo corta el haz entre emisor y receptor enfrentados"
+            },
+            {
+              "id": "b",
+              "texto": "Porque mide la distancia con ondas de sonido"
+            },
+            {
+              "id": "c",
+              "texto": "Porque no requiere alimentación eléctrica"
+            },
+            {
+              "id": "d",
+              "texto": "Porque emisor y receptor van en un solo módulo, sin cableado en ambos extremos del cajón"
+            }
+          ],
+          "respuestaCorrecta": "d",
+          "explicacion": "En la modalidad por reflexión, el emisor y el receptor van juntos en el mismo módulo. La carrocería refleja la luz infrarroja de regreso al fotodetector. Así se instala un único módulo, por ejemplo en el piso o techo del cajón, sin cableado en ambos extremos. En la modalidad por interrupción (barrera) el vehículo corta el haz entre un emisor y un receptor enfrentados.\n\n---"
+        },
+        {
+          "id": "P08",
+          "enunciado": "¿Por qué se elige MQTT como protocolo en el tramo sensor-broker (2.6.9)?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Porque su modelo publish/subscribe con broker, su cabecera de 2 bytes y sus niveles de QoS se ajustan a eventos de cambio de estado para múltiples consumidores"
+            },
+            {
+              "id": "b",
+              "texto": "Porque funciona sobre UDP y su cabecera es de 4 bytes"
+            },
+            {
+              "id": "c",
+              "texto": "Porque mantiene una conexión full-duplex permanente"
+            },
+            {
+              "id": "d",
+              "texto": "Porque es el estándar para consultar APIs REST desde el navegador"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "MQTT usa publicación/suscripción mediante un broker que desacopla publicadores y suscriptores. Su cabecera es de solo 2 bytes y ofrece QoS 0, 1 y 2. Los nodos permanecen inactivos y solo publican cuando cambia el estado (ocupado/libre), y el mensaje debe llegar a varios consumidores (panel, app y señalización). Esto ahorra energía en el ESP32. HTTP y WebSocket se reservan para la interacción con las aplicaciones de usuario.\n\n---"
+        },
+        {
+          "id": "P09",
+          "enunciado": "¿Qué patrón de arquitectura móvil se describe por su flujo bidireccional con *data binding* y se considera estándar de la industria para proyectos medianos y grandes (2.6.6)?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "MVC: la vista es pasiva y todo se delega al controlador"
+            },
+            {
+              "id": "b",
+              "texto": "MVP: la lógica de negocio vive en el presentador y la vista es pasiva"
+            },
+            {
+              "id": "c",
+              "texto": "MVVM: usa data binding y programación reactiva con flujo bidireccional"
+            },
+            {
+              "id": "d",
+              "texto": "Clean Architecture: Presentación, Dominio y Datos, ideal para apps pequeñas"
+            }
+          ],
+          "respuestaCorrecta": "c",
+          "explicacion": "MVVM tiene Modelo, Vista y ViewModel. Su rasgo clave es el flujo bidireccional mediante data binding y programación reactiva. Es considerado el estándar de la industria para proyectos medianos y grandes por su equilibrio entre practicidad, modularidad y escalabilidad. MVC tiene el problema de los controladores masivos y MVP usa una vista pasiva.\n\n---"
+        },
+        {
+          "id": "P10",
+          "enunciado": "En las pruebas de validación (2.8), ¿cuáles se realizan en el sitio del desarrollador por un grupo de usuarios, en un ambiente controlado por el equipo de desarrollo?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Pruebas beta"
+            },
+            {
+              "id": "b",
+              "texto": "Pruebas alfa"
+            },
+            {
+              "id": "c",
+              "texto": "Pruebas de recuperación"
+            },
+            {
+              "id": "d",
+              "texto": "Pruebas de unidad"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Las pruebas alfa las hace un grupo de usuarios en el sitio del desarrollador, en un ambiente controlado por el equipo. Las beta se ejecutan en sitios de los usuarios finales, sin control del equipo. Las de aceptación las realiza el usuario final para validar todos los requerimientos antes de la entrega.\n\n---"
+        }
+      ]
+    },
+    {
+      "id": "p-seccion-3",
+      "titulo": "Capítulo III. Marco metodológico",
+      "preguntas": [
+        {
+          "id": "P11",
+          "enunciado": "¿Por qué el protocolo se clasifica como investigación aplicada (3.2)?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Porque busca formular nuevas teorías científicas sobre estacionamientos"
+            },
+            {
+              "id": "b",
+              "texto": "Porque diseña nuevos componentes electrónicos desde cero"
+            },
+            {
+              "id": "c",
+              "texto": "Porque implementa conocimientos tecnológicos existentes para resolver un problema real"
+            },
+            {
+              "id": "d",
+              "texto": "Porque únicamente describe estadísticas sin intervenir"
+            }
+          ],
+          "respuestaCorrecta": "c",
+          "explicacion": "La investigación es aplicada porque no busca formular teorías nuevas ni crear componentes electrónicos desde cero. Aplica conocimientos tecnológicos existentes (IoT, sensores, actuadores, microcontroladores) para resolver un problema real. Además se apoya en la metodología de prototipo: requerimientos, diseño, implementación y evaluación con usuarios.\n\n---"
+        },
+        {
+          "id": "P12",
+          "enunciado": "¿Qué tamaño de muestra se obtiene en 3.2.2 con z = 2, p = 15%, q = 85%, e = 3% y N = 1000?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "120 estudiantes"
+            },
+            {
+              "id": "b",
+              "texto": "362 estudiantes"
+            },
+            {
+              "id": "c",
+              "texto": "1,000 estudiantes"
+            },
+            {
+              "id": "d",
+              "texto": "8,289 estudiantes"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "Se usa muestreo probabilístico con la fórmula n = z²·p·q·N / [e²(N−1) + z²·p·q], con z = 2, p = 15%, q = 85%, e = 3% y N = 1000 (12.06% de los 8,289 matriculados). El resultado citado es 362 estudiantes, que usan el estacionamiento en el turno matutino o vespertino. Nota: con esos valores el cálculo da ≈ 361.9, y el paso intermedio impreso en el documento no coincide.\n\n---"
+        },
+        {
+          "id": "P13",
+          "enunciado": "En la hipótesis 1 (3.3), ¿cuál es la variable independiente?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "La implementación de la arquitectura de red de sensores infrarrojos basada en IoT"
+            },
+            {
+              "id": "b",
+              "texto": "La reducción del tiempo promedio de búsqueda de lugar"
+            },
+            {
+              "id": "c",
+              "texto": "El número de estudiantes encuestados"
+            },
+            {
+              "id": "d",
+              "texto": "La eliminación de las maniobras de retorno forzadas"
+            }
+          ],
+          "respuestaCorrecta": "a",
+          "explicacion": "La hipótesis 1 plantea que la arquitectura de red de sensores infrarrojos basada en IoT permite una gestión dinámica de los cajones. La variable independiente es esa implementación (la causa). La dependiente es la reducción del tiempo de búsqueda y de las maniobras de retorno forzadas (el efecto).\n\n---"
+        },
+        {
+          "id": "P14",
+          "enunciado": "¿Cuál es el propósito de la segunda encuesta en la sección 3.4?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Diagnosticar los problemas actuales del estacionamiento"
+            },
+            {
+              "id": "b",
+              "texto": "Evaluar el diseño ya terminado del prototipo"
+            },
+            {
+              "id": "c",
+              "texto": "Medir el tiempo exacto de búsqueda de cajones"
+            },
+            {
+              "id": "d",
+              "texto": "Obtener requerimientos y preferencias de los estudiantes para el diseño del prototipo"
+            }
+          ],
+          "respuestaCorrecta": "d",
+          "explicacion": "Son tres encuestas: la primera diagnostica los problemas actuales del estacionamiento, la segunda recaba requerimientos y preferencias de los estudiantes para el diseño (sistema operativo, importancia de ocupación, reserva y voz, mapa o lista, colores verde/rojo, iconos, modo oscuro, función adicional) y la tercera evalúa el diseño del prototipo para refinarlo.\n\n---"
+        },
+        {
+          "id": "P15",
+          "enunciado": "En el plan de negocios (3.6), con una inversión inicial de $120,000 MXN y una inversión fija de $59,200, ¿cuánto queda para cubrir los gastos del primer mes de operaciones?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "$41,334"
+            },
+            {
+              "id": "b",
+              "texto": "$60,800"
+            },
+            {
+              "id": "c",
+              "texto": "$1,238"
+            },
+            {
+              "id": "d",
+              "texto": "$1,338,606.28"
+            }
+          ],
+          "respuestaCorrecta": "b",
+          "explicacion": "En el plan de negocios proyectado a un año, la inversión inicial es de aproximadamente $120,000 MXN. La inversión fija (celulares de prueba, equipo de cómputo, herramientas y mesas) suma $59,200, y los $60,800 restantes cubren los gastos del primer mes de operaciones. Otros datos: precio unitario $1,995 y renta mensual por módulo $376.06.\n\n---\n\n## Clave de respuestas\n\n| # | Resp. | # | Resp. | # | Resp. |\n|---|-------|---|-------|---|-------|\n| 1 | b | 6 | b | 11 | c |\n| 2 | b | 7 | d | 12 | b |\n| 3 | c | 8 | a | 13 | a |\n| 4 | c | 9 | c | 14 | d |\n| 5 | a | 10 | b | 15 | b |"
+        }
+      ]
+    }
+  ]
+}
